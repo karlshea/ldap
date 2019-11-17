@@ -1,7 +1,7 @@
 {
     "name": "grahl/ldap",
     "type": "library",
-    "description": "An abstraction in front of PHP's LDAP functions, compatible with PHP 5.3.9 onwards.",
+    "description": "A fork for symfony/ldap to work with Drupal CI.",
     "keywords": ["ldap", "active directory"],
     "homepage": "https://symfony.com",
     "license": "MIT",
