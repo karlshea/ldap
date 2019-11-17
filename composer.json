@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^7.2.9",
-        "symfony/options-resolver": "^4.4|^5.0",
+        "symfony/options-resolver": "^4.4|^5.0"
     },
     "require-dev": {
         "symfony/security-core": "^5.0"
