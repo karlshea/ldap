@@ -1,5 +1,5 @@
 {
-    "name": "symfony/ldap",
+    "name": "grahl/ldap",
     "type": "library",
     "description": "An abstraction in front of PHP's LDAP functions, compatible with PHP 5.3.9 onwards.",
     "keywords": ["ldap", "active directory"],
@@ -18,7 +18,6 @@
     "require": {
         "php": "^7.2.9",
         "symfony/options-resolver": "^4.4|^5.0",
-        "ext-ldap": "*"
     },
     "require-dev": {
         "symfony/security-core": "^5.0"
