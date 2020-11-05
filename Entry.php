@@ -18,11 +18,13 @@ class Entry
 {
     private $dn;
     private $attributes;
+    private $lowercaseAttributes;
 
     public function __construct(string $dn, array $attributes = [])
     {
         $this->dn = $dn;
         $this->attributes = $attributes;
+        $this->lowercaseAttributes = array_change_key_case($attributes);
     }
 
     /**
@@ -39,12 +41,13 @@ class Entry
      * Returns whether an attribute exists.
      *
      * @param string $name The name of the attribute
+     * @param bool $forceLowercase Force lowercase attribute check
      *
      * @return bool
      */
-    public function hasAttribute(string $name)
+    public function hasAttribute(string $name, bool $forceLowercase = false)
     {
-        return isset($this->attributes[$name]);
+        return $forceLowercase ? isset($this->lowercaseAttributes[mb_strtolower($name)]) : isset($this->attributes[$name]);
     }
 
     /**
@@ -54,22 +57,27 @@ class Entry
      * this value is returned as an array.
      *
      * @param string $name The name of the attribute
+     * @param bool $forceLowercase Use the lowercase name of the attribute
      *
      * @return array|null
      */
-    public function getAttribute(string $name)
+    public function getAttribute(string $name, bool $forceLowercase = false)
     {
-        return isset($this->attributes[$name]) ? $this->attributes[$name] : null;
+        return $forceLowercase 
+            ? (isset($this->lowercaseAttributes[mb_strtolower($name)]) ? $this->lowercaseAttributes[mb_strtolower($name)] : null)
+            : (isset($this->attributes[$name]) ? $this->attributes[$name] : null);
     }
 
     /**
      * Returns the complete list of attributes.
      *
+     * @param bool $forceLowercase Get the lowercase list of attributes
+     *
      * @return array
      */
-    public function getAttributes()
+    public function getAttributes(bool $forceLowercase = false)
     {
-        return $this->attributes;
+        return $forceLowercase ? $this->lowercaseAttributes : $this->attributes;
     }
 
     /**
@@ -78,6 +86,7 @@ class Entry
     public function setAttribute(string $name, array $value)
     {
         $this->attributes[$name] = $value;
+        $this->lowercaseAttributes[mb_strtolower($name)] = $value;
     }
 
     /**
@@ -86,5 +95,6 @@ class Entry
     public function removeAttribute(string $name)
     {
         unset($this->attributes[$name]);
+        unset($this->lowercaseAttributes[mb_strtolower($name)]);
     }
 }

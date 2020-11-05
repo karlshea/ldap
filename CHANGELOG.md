@@ -11,6 +11,7 @@ CHANGELOG
 -----
 
  * Added the "extra_fields" option, an array of custom fields to pull from the LDAP server
+ * Added option to allow consumers to force attribute keys to be lowercase when utilizing the Entry class.
 
 4.3.0
 -----
